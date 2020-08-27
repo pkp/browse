@@ -18,7 +18,7 @@ msgid "plugins.block.browse.displayName"
 msgstr "Bloque de exploración"
 
 msgid "plugins.block.browse.description"
-msgstr "Este plugin proporciona herramientas de exploración en la barra lateral."
+msgstr "Este módulo proporciona herramientas de exploración en la barra lateral."
 
 msgid "plugins.block.browse.category"
 msgstr "Categorías"

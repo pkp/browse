@@ -14,9 +14,9 @@
  *  browseable series.
  *}
 <div class="pkp_block block_browse">
-	<span class="title">
+	<h2 class="title">
 		{translate key="plugins.block.browse"}
-	</span>
+	</h2>
 
 	<nav class="content" role="navigation" aria-label="{translate|escape key="plugins.block.browse"}">
 		<ul>
