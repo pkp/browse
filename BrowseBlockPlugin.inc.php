@@ -47,7 +47,7 @@ class BrowseBlockPlugin extends BlockPlugin {
 		if ($router->getRequestedPage($request) . '/' . $router->getRequestedOp($request) == 'catalog/category') $requestedCategoryPath = reset($args);
 		$templateMgr->assign(array(
 			'browseBlockSelectedCategory' => $requestedCategoryPath,
-			'browseCategoryFactory' => $categoryDao->getByContextId($context->getId()),
+			'browseCategories' => $categoryDao->getByContextId($context->getId())->toArray(),
 		));
 		return parent::getContents($templateMgr);
 	}
