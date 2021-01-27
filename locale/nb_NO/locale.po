@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2020-12-15 13:52+0000\n"
-"Last-Translator: Eirik Hanssen <eirikh@oslomet.no>\n"
+"PO-Revision-Date: 2021-01-28 10:53+0000\n"
+"Last-Translator: FRITT, University of Oslo Library <fritt-"
+"info@journals.uio.no>\n"
 "Language-Team: Norwegian Bokmål <http://translate.pkp.sfu.ca/projects/"
 "plugins/browse-plugin/nb_NO/>\n"
 "Language: nb_NO\n"
@@ -15,10 +16,10 @@ msgid "plugins.block.browse.category"
 msgstr "Kategorier"
 
 msgid "plugins.block.browse.description"
-msgstr "Dette programtillegget leverer \"bla\" verktøy til sidemenyen."
+msgstr "Dette programtillegget setter inn \"bla gjennom-verktøy\" i sidemenyen."
 
 msgid "plugins.block.browse.displayName"
-msgstr "Blokk til blaing"
+msgstr "Bla gjennom-blokk"
 
 msgid "plugins.block.browse"
 msgstr "Bla gjennom"
