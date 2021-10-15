@@ -12,49 +12,59 @@
  */
 
 namespace APP\plugins\blocks\browse;
-
 use APP\facades\Repo;
+use PKP\plugins\BlockPlugin;
 
-class BrowseBlockPlugin extends \PKP\plugins\BlockPlugin {
-	/**
-	 * Get the display name of this plugin.
-	 * @return String
-	 */
-	function getDisplayName() {
-		return __('plugins.block.browse.displayName');
-	}
+class BrowseBlockPlugin extends BlockPlugin
+{
+    /**
+     * Get the display name of this plugin.
+     *
+     * @return string
+     */
+    public function getDisplayName()
+    {
+        return __('plugins.block.browse.displayName');
+    }
 
-	/**
-	 * Get a description of the plugin.
-	 */
-	function getDescription() {
-		return __('plugins.block.browse.description');
-	}
+    /**
+     * Get a description of the plugin.
+     */
+    public function getDescription()
+    {
+        return __('plugins.block.browse.description');
+    }
 
-	/**
-	 * Get the HTML contents of the browse block.
-	 * @param $templateMgr PKPTemplateManager
-	 * @return string
-	 */
-	function getContents($templateMgr, $request = null) {
-		$context = $request->getContext();
-		if (!$context) {
-			return '';
-		}
-		$router = $request->getRouter();
+    /**
+     * Get the HTML contents of the browse block.
+     *
+     * @param PKPTemplateManager $templateMgr
+     * @param null|mixed $request
+     *
+     * @return string
+     */
+    public function getContents($templateMgr, $request = null)
+    {
+        $context = $request->getContext();
+        if (!$context) {
+            return '';
+        }
+        $router = $request->getRouter();
 
-		$requestedCategoryPath = null;
-		$args = $router->getRequestedArgs($request);
-		if ($router->getRequestedPage($request) . '/' . $router->getRequestedOp($request) == 'catalog/category') $requestedCategoryPath = reset($args);
-		$templateMgr->assign(array(
-			'browseBlockSelectedCategory' => $requestedCategoryPath,
-			'browseCategories' => Repo::category()->getMany(
-				Repo::category()->getCollector()
-					->filterByContextIds([$context->getId()])
-			),
-		));
-		return parent::getContents($templateMgr);
-	}
+        $requestedCategoryPath = null;
+        if ($router->getRequestedPage($request) . '/' . $router->getRequestedOp($request) == 'catalog/category') {
+            $args = $router->getRequestedArgs($request);
+            $requestedCategoryPath = reset($args);
+        }
+        $templateMgr->assign([
+            'browseBlockSelectedCategory' => $requestedCategoryPath,
+            'browseCategories' => Repo::category()->getMany(
+                Repo::category()->getCollector()
+                    ->filterByContextIds([$context->getId()])
+            ),
+        ]);
+        return parent::getContents($templateMgr);
+    }
 }
 
 if (!PKP_STRICT_MODE) {
