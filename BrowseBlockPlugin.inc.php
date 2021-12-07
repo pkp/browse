@@ -39,7 +39,6 @@ class BrowseBlockPlugin extends BlockPlugin {
 		if (!$context) {
 			return '';
 		}
-		$categoryDao = DAORegistry::getDAO('CategoryDAO'); /* @var $categoryDao CategoryDAO */
 		$router = $request->getRouter();
 
 		$requestedCategoryPath = null;
@@ -47,7 +46,10 @@ class BrowseBlockPlugin extends BlockPlugin {
 		if ($router->getRequestedPage($request) . '/' . $router->getRequestedOp($request) == 'catalog/category') $requestedCategoryPath = reset($args);
 		$templateMgr->assign(array(
 			'browseBlockSelectedCategory' => $requestedCategoryPath,
-			'browseCategories' => $categoryDao->getByContextId($context->getId())->toArray(),
+			'browseCategories' => Repo::category()->getMany(
+				Repo::category()->getCollector()
+					->filterByContextIds([$context->getId()])
+			),
 		));
 		return parent::getContents($templateMgr);
 	}
