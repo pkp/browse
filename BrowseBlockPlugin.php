@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file plugins/blocks/browse/BrowseBlockPlugin.inc.php
+ * @file plugins/blocks/browse/BrowseBlockPlugin.php
  *
  * Copyright (c) 2014-2020 Simon Fraser University
  * Copyright (c) 2003-2020 John Willinsky
@@ -11,9 +11,11 @@
  * @brief Class for browse block plugin
  */
 
-import('lib.pkp.classes.plugins.BlockPlugin');
+namespace APP\plugins\blocks\browse;
 
-class BrowseBlockPlugin extends BlockPlugin {
+use APP\facades\Repo;
+
+class BrowseBlockPlugin extends \PKP\plugins\BlockPlugin {
 	/**
 	 * Get the display name of this plugin.
 	 * @return String
