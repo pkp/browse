@@ -58,10 +58,9 @@ class BrowseBlockPlugin extends BlockPlugin
         }
         $templateMgr->assign([
             'browseBlockSelectedCategory' => $requestedCategoryPath,
-            'browseCategories' => Repo::category()->getMany(
-                Repo::category()->getCollector()
-                    ->filterByContextIds([$context->getId()])
-            ),
+            'browseCategories' => Repo::category()->getCollector()
+                ->filterByContextIds([$context->getId()])
+                ->getMany()
         ]);
         return parent::getContents($templateMgr);
     }
