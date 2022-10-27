@@ -25,11 +25,13 @@
 					{translate key="plugins.block.browse.category"}
 					<ul>
 						{foreach from=$browseCategories item=browseCategory}
-							<li class="category_{$browseCategory->getId()}{if $browseCategory->getParentId()} is_sub{/if}{if $browseBlockSelectedCategory == $browseCategory->getPath()} current{/if}">
-								<a href="{url router=\PKP\core\PKPApplication::ROUTE_PAGE page="catalog" op="category" path=$browseCategory->getPath()|escape}">
-									{$browseCategory->getLocalizedTitle()|escape}
-								</a>
-							</li>
+							{if !$browseSeriesItem->getIsInactive()}
+								<li class="category_{$browseCategory->getId()}{if $browseCategory->getParentId()} is_sub{/if}{if $browseBlockSelectedCategory == $browseCategory->getPath()} current{/if}">
+									<a href="{url router=\PKP\core\PKPApplication::ROUTE_PAGE page="catalog" op="category" path=$browseCategory->getPath()|escape}">
+										{$browseCategory->getLocalizedTitle()|escape}
+									</a>
+								</li>
+							{/if}
 						{/foreach}
 					</ul>
 				</li>
