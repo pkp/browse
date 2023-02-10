@@ -2,8 +2,8 @@
 # Marisa Mourão <marisa.mourao@usdb.uminho.pt>, 2023.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-02-10 09:48+0000\n"
-"Last-Translator: Marisa Mourão <marisa.mourao@usdb.uminho.pt>\n"
+"PO-Revision-Date: 2023-02-10 09:53+0000\n"
+"Last-Translator: Carla Marques <carla.marques@usdb.uminho.pt>\n"
 "Language-Team: Portuguese <http://translate.pkp.sfu.ca/projects/plugins/"
 "browse-plugin/pt/>\n"
 "Language: pt\n"
@@ -14,13 +14,13 @@ msgstr ""
 "X-Generator: Weblate 4.13.1\n"
 
 msgid "plugins.block.browse.displayName"
-msgstr "Procurar bloco"
+msgstr "Bloco de Navegação"
 
 msgid "plugins.block.browse.description"
-msgstr "Este plugin fornece ferramentas para \"procurar\" na barra lateral."
+msgstr "Este plugin fornece ferramentas para navegar na barra lateral."
 
 msgid "plugins.block.browse.category"
 msgstr "Categorias"
 
 msgid "plugins.block.browse"
-msgstr "Procurar"
+msgstr "Navegar"
