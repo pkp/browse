@@ -53,7 +53,7 @@ class BrowseBlockPlugin extends BlockPlugin
         $router = $request->getRouter();
 
         $requestedCategoryPath = null;
-        if ($router->getRequestedPage($request) . '/' . $router->getRequestedOp($request) == 'catalog/category') {
+        if ($router->getRequestedPage($request) . '/' . $router->getRequestedOp($request) == 'preprints/category') {
             $args = $router->getRequestedArgs($request);
             $requestedCategoryPath = reset($args);
         }
