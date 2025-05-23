@@ -1,0 +1,25 @@
+# wenshao521！ <wainixueer3334@gmail.com>, 2025.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2025-05-11 15:50+0000\n"
+"Last-Translator: wenshao521！ <wainixueer3334@gmail.com>\n"
+"Language-Team: Chinese (Simplified) <http://translate.pkp.sfu.ca/projects/"
+"plugins/browse-plugin/zh_Hans/>\n"
+"Language: zh_Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.18.2\n"
+
+msgid "plugins.block.browse"
+msgstr "浏览"
+
+msgid "plugins.block.browse.displayName"
+msgstr "浏览区块"
+
+msgid "plugins.block.browse.description"
+msgstr "该插件提供侧边栏“浏览”工具。"
+
+msgid "plugins.block.browse.category"
+msgstr "分类"
