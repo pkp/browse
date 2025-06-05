@@ -14,10 +14,12 @@
 namespace APP\plugins\blocks\browse;
 
 use APP\facades\Repo;
+use PKP\context\Context;
 use PKP\plugins\BlockPlugin;
 
 class BrowseBlockPlugin extends BlockPlugin
 {
+    private array $processedCategoryIds = [];
     /**
      * Get the display name of this plugin.
      *
@@ -46,7 +48,7 @@ class BrowseBlockPlugin extends BlockPlugin
      */
     public function getContents($templateMgr, $request = null)
     {
-        $context = $request->getContext();
+        $context = $request->getContext(); /** @var Context $context */
         if (!$context) {
             return '';
         }
@@ -57,13 +59,59 @@ class BrowseBlockPlugin extends BlockPlugin
             $args = $router->getRequestedArgs($request);
             $requestedCategoryPath = reset($args);
         }
+
+        // Get parent categories
+        $categories = Repo::category()
+            ->getCollector()
+            ->filterByContextIds([$context->getId()])
+            ->filterByParentIds([null])
+            ->getMany();
+
+        // Process each root category
+        $processedCategories = $categories->map(fn($category) => $this->formatCategoryData($category));
         $templateMgr->assign([
             'browseBlockSelectedCategory' => $requestedCategoryPath,
-            'browseCategories' => Repo::category()->getCollector()
-                ->filterByContextIds([$context->getId()])
-                ->getMany()
+            'browseCategories' => $processedCategories
         ]);
         return parent::getContents($templateMgr);
+    }
+
+    /**
+     * Format category data.
+     */
+    private function formatCategoryData(\Category $category): array
+    {
+        // Avoid processing the same category multiple times
+        if (in_array($category->getId(), $this->processedCategoryIds)) {
+            return [];
+        }
+
+        $this->processedCategoryIds[] = $category->getId();
+
+        return [
+            'id' => $category->getId(),
+            'path' => $category->getPath(),
+            'parentId' => $category->getParentId(),
+            'localizedTitle' => $category->getLocalizedTitle(),
+            'subCategories' => $this->getSubCategories($category->getId(), $category->getContextId())
+        ];
+    }
+
+    /**
+     * Get subcategories for a given parent category.
+     */
+    private function getSubCategories(int $parentId, int $contextId): array
+    {
+        $children = Repo::category()->getCollector()
+            ->filterByContextIds([$contextId])
+            ->filterByParentIds([$parentId])
+            ->getMany();
+
+        if ($children->isEmpty()) {
+            return [];
+        }
+
+        return $children->map(fn($category) => $this->formatCategoryData($category))->all();
     }
 }
 
