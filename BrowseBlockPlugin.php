@@ -13,8 +13,10 @@
 
 namespace APP\plugins\blocks\browse;
 
+use APP\core\Application;
 use APP\facades\Repo;
 use PKP\plugins\BlockPlugin;
+use PKP\template\PKPTemplateManager;
 
 class BrowseBlockPlugin extends BlockPlugin
 {
@@ -52,8 +54,9 @@ class BrowseBlockPlugin extends BlockPlugin
         }
         $router = $request->getRouter();
 
+        $catalogPage = (Application::get()->getName() === 'ops') ? 'preprints' : 'catalog';
         $requestedCategoryPath = null;
-        if ($router->getRequestedPage($request) . '/' . $router->getRequestedOp($request) == 'catalog/category') {
+        if ($router->getRequestedPage($request) . '/' . $router->getRequestedOp($request) == "$catalogPage/category") {
             $args = $router->getRequestedArgs($request);
             $requestedCategoryPath = reset($args);
         }
@@ -61,7 +64,8 @@ class BrowseBlockPlugin extends BlockPlugin
             'browseBlockSelectedCategory' => $requestedCategoryPath,
             'browseCategories' => Repo::category()->getCollector()
                 ->filterByContextIds([$context->getId()])
-                ->getMany()
+                ->getMany(),
+            'catalogPage' => $catalogPage
         ]);
         return parent::getContents($templateMgr);
     }
