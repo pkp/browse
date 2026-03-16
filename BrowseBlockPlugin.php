@@ -3,8 +3,8 @@
 /**
  * @file plugins/blocks/browse/BrowseBlockPlugin.php
  *
- * Copyright (c) 2014-2022 Simon Fraser University
- * Copyright (c) 2003-2022 John Willinsky
+ * Copyright (c) 2014-2026 Simon Fraser University
+ * Copyright (c) 2003-2026 John Willinsky
  * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
  *
  * @class BrowseBlockPlugin
@@ -13,8 +13,10 @@
 
 namespace APP\plugins\blocks\browse;
 
+use APP\core\Application;
 use APP\facades\Repo;
 use PKP\plugins\BlockPlugin;
+use PKP\template\PKPTemplateManager;
 
 class BrowseBlockPlugin extends BlockPlugin
 {
@@ -23,7 +25,7 @@ class BrowseBlockPlugin extends BlockPlugin
      *
      * @return string
      */
-    public function getDisplayName()
+    public function getDisplayName(): string
     {
         return __('plugins.block.browse.displayName');
     }
@@ -31,7 +33,7 @@ class BrowseBlockPlugin extends BlockPlugin
     /**
      * Get a description of the plugin.
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return __('plugins.block.browse.description');
     }
@@ -41,10 +43,8 @@ class BrowseBlockPlugin extends BlockPlugin
      *
      * @param PKPTemplateManager $templateMgr
      * @param null|mixed $request
-     *
-     * @return string
      */
-    public function getContents($templateMgr, $request = null)
+    public function getContents($templateMgr, $request = null): string
     {
         $context = $request->getContext();
         if (!$context) {
@@ -52,8 +52,9 @@ class BrowseBlockPlugin extends BlockPlugin
         }
         $router = $request->getRouter();
 
+        $catalogPage = (Application::get()->getName() === 'ops') ? 'preprints' : 'catalog';
         $requestedCategoryPath = null;
-        if ($router->getRequestedPage($request) . '/' . $router->getRequestedOp($request) == 'catalog/category') {
+        if ($router->getRequestedPage($request) . '/' . $router->getRequestedOp($request) == "$catalogPage/category") {
             $args = $router->getRequestedArgs($request);
             $requestedCategoryPath = reset($args);
         }
@@ -61,7 +62,8 @@ class BrowseBlockPlugin extends BlockPlugin
             'browseBlockSelectedCategory' => $requestedCategoryPath,
             'browseCategories' => Repo::category()->getCollector()
                 ->filterByContextIds([$context->getId()])
-                ->getMany()
+                ->getMany(),
+            'catalogPage' => $catalogPage
         ]);
         return parent::getContents($templateMgr);
     }
