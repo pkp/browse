@@ -1,8 +1,8 @@
 {**
  * templates/block.tpl
  *
- * Copyright (c) 2014-2025 Simon Fraser University
- * Copyright (c) 2003-2025 John Willinsky
+ * Copyright (c) 2014-2026 Simon Fraser University
+ * Copyright (c) 2003-2026 John Willinsky
  * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
  *
  * @brief Common site sidebar menu for browsing the catalog.
@@ -18,7 +18,7 @@
 	<ul{if $level === 0} class="categories_list" {/if}>
 		{foreach from=$categories item=category}
 			<li class="category_{$category.id}{if $category.parentId} is_sub{/if}">
-				<a href="{url router=PKP\core\PKPApplication::ROUTE_PAGE page="catalog" op="category" path=$category.path|escape}" class="{if $browseBlockSelectedCategory == $category.path} current{/if}">
+				<a href="{url router=PKP\core\PKPApplication::ROUTE_PAGE page=$catalogPage op="category" path=$category.path|escape}" class="{if $browseBlockSelectedCategory == $category.path} current{/if}">
 					{$category.localizedTitle|escape}
 				</a>
 				{if $category.subCategories}
