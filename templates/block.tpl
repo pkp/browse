@@ -47,10 +47,10 @@
 </div><!-- .block_browse -->
 
 <style>
-	.current {
-		padding-left: 0.5em !important;
-		border-left: 4px solid #ddd !important;
-		color: rgba(0, 0, 0, 0.54) !important;
-		cursor: text !important;
+	.block_browse .current {
+		padding-left: 0.5em;
+		border-left: 4px solid #ddd;
+		color: rgba(0, 0, 0, 0.54);
+		cursor: text;
 	}
 </style>
